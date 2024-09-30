@@ -25,8 +25,8 @@ DROP TABLE IF EXISTS user_pets;
 CREATE TABLE user_pets(                     -- junction table
     pets_fk        TEXT,
     user_fk        TEXT,
-    FOREIGN KEY(pets_fk) REFERENCES pets(pets_pk),
-    FOREIGN KEY(user_fk) REFERENCES users(user_pk),
+    FOREIGN KEY(pets_fk) REFERENCES pets(pets_pk) ON DELETE CASCADE,
+    FOREIGN KEY(user_fk) REFERENCES users(user_pk) ON DELETE CASCADE,
     PRIMARY KEY(pets_fk, user_fk)           -- compound key
 ) WITHOUT ROWID;
 
@@ -35,9 +35,9 @@ DROP TABLE IF EXISTS user_phones;
 CREATE TABLE user_phones (                  -- lookup table
     phone_pk       TEXT,                    -- Unique identifier for each phone record
     user_fk        TEXT,                    -- Foreign key referencing the users table
-    user_phone     TEXT NOT NULL,
+    user_phonenumber     TEXT NOT NULL,
     PRIMARY KEY(phone_pk, user_fk),          -- compossite key
-    FOREIGN KEY(user_fk) REFERENCES users(user_pk)
+    FOREIGN KEY(user_fk) REFERENCES users(user_pk) ON DELETE CASCADE
 ) WITHOUT ROWID; 
 
 DROP TABLE IF EXISTS user_vehicles;
@@ -45,6 +45,7 @@ CREATE TABLE user_vehicles (
     vehicle_pk     TEXT,
     user_fk        TEXT,
     PRIMARY KEY (vehicle_pk, user_fk)
+    FOREIGN KEY (user_fk) REFERENCES users(user_pk) ON DELETE CASCADE
 ) WITHOUT ROWID;
 
 DROP TABLE IF EXISTS vehicle_types;
@@ -60,5 +61,6 @@ CREATE TABLE user_hobbies (
     user_hobbies_pk     TEXT,
     user_hobbies_name   TEXT,
     PRIMARY KEY (user_hobbies_pk, user_fk)
+    FOREIGN KEY (user_fk) REFERENCES users(user_pk) ON DELETE CASCADE
 ) WITHOUT ROWID;
 
