@@ -55,6 +55,7 @@ CREATE TABLE vehicle_types (
     PRIMARY KEY(vehicle_type_pk)
 ) WITHOUT ROWID;
 
+DROP TABLE IF EXISTS user_hobbies;
 CREATE TABLE user_hobbies (
     user_fk             TEXT,
     user_hobbies_pk     TEXT,
